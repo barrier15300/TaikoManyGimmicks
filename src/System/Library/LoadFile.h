@@ -309,9 +309,9 @@ public:
 	double SongPlaySpeed = 0;
 	double SongBlankTime = 0;
 	double SongOffset = 0;
-	int SongVolume = 0;
-	int SEVolume = 0;
-	bool ChartHeaderSound = false;
+	int SongVolume = 100;
+	int SEVolume = 100;
+	bool ChartHeaderSound = true;
 	bool JiroBPMDelayFlag = false;
 	double DrawingOperationRangeWidth = 0;
 	double DrawingOperationRangeHeight = 0;
@@ -321,22 +321,22 @@ public:
 	bool GridScreen = false;
 	bool DebugScreen = false;
 
-	// privart
-	string SkinFolderName = "";
-	bool WaitVSyncFlag = false;
-	int WindowSizeWidth = 0;
-	int WindowSizeHeight = 0;
+	// private
+	string SkinFolderName = "Default";
+	bool WaitVSyncFlag = true;
+	int WindowSizeWidth = 1280;
+	int WindowSizeHeight = 720;
 
 #ifndef __ANDROID__
 	bool Error = false;
 
 	//// keyconfig.ini
-	int KEY_INPUT_LD[10] = { 0,0,0,0,0,0,0,0,0,0 };
-	int KEY_INPUT_LK[10] = { 0,0,0,0,0,0,0,0,0,0 };
-	int KEY_INPUT_RD[10] = { 0,0,0,0,0,0,0,0,0,0 };
-	int KEY_INPUT_RK[10] = { 0,0,0,0,0,0,0,0,0,0 };
+	int KEY_INPUT_LK[10] = {KEY_INPUT_D,0,0,0,0,0,0,0,0,0 };
+	int KEY_INPUT_LD[10] = {KEY_INPUT_F,0,0,0,0,0,0,0,0,0 };
+	int KEY_INPUT_RD[10] = {KEY_INPUT_J,0,0,0,0,0,0,0,0,0 };
+	int KEY_INPUT_RK[10] = {KEY_INPUT_K,0,0,0,0,0,0,0,0,0 };
 
-	int QuickAccessKey[(int)QuickAccessID::QuickAccessKeyCount] = { 0,0,0,0 };
+	int QuickAccessKey[(int)QuickAccessID::QuickAccessKeyCount] = { KEY_INPUT_1,KEY_INPUT_2,KEY_INPUT_3,KEY_INPUT_4};
 #else
 	char ApplicationPath[256];
 #endif
@@ -361,9 +361,12 @@ public:
 
 	// ConfigLoad
 	void LoadConfigFile();
+	void MakeConfigFile();
 #ifndef __ANDROID__
 	void LoadKeyConfigFile();
+	void MakeKeyConfigFile();
 #endif
+	
 
 	// SkinLoad
 	void LoadSkinConfig();

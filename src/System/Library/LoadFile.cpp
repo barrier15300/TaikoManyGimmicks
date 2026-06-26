@@ -18,7 +18,7 @@ inline void AddFont(string FontPath) {
 
 void FileLoad::LoadConfigFile() {
 	vector<string> list;
-	if (!LoadFileTEXT(list, "config.ini")) { return; }
+	if (!LoadFileTEXT(list, "config.ini")) { MakeConfigFile(); return; }
 	for (int i = 0, size = list.size(); i < size; ++i) {
 		string val = strtrim(list[i].substr(list[i].find(":") + 1, list[i].size() - (list[i].find(":") + 1)));
 		string ID = strtrim(list[i].substr(0, list[i].find(":")));
@@ -55,11 +55,48 @@ void FileLoad::LoadConfigFile() {
 #endif
 	}
 }
+void FileLoad::MakeConfigFile() {
+	std::ofstream ofs("config.ini");
+
+#define ELEM_TRANSFORM(v) #v":" << v
+
+	ofs << ELEM_TRANSFORM(AutoPlayFlag) << std::endl;
+	ofs << ELEM_TRANSFORM(SkinFolderName) << std::endl;
+	ofs << ELEM_TRANSFORM(WaitVSyncFlag) << std::endl;
+	ofs << ELEM_TRANSFORM(StableVSyncFlag) << std::endl;
+	ofs << ELEM_TRANSFORM(WindowSizeWidth) << std::endl;
+	ofs << ELEM_TRANSFORM(WindowSizeHeight) << std::endl;
+	ofs << ELEM_TRANSFORM(ConstantSCROLL) << std::endl;
+	ofs << ELEM_TRANSFORM(ConstantBPM) << std::endl;
+	ofs << ELEM_TRANSFORM(AddSCROLL) << std::endl;
+	ofs << ELEM_TRANSFORM(JudgeGood) << std::endl;
+	ofs << ELEM_TRANSFORM(JudgeOk) << std::endl;
+	ofs << ELEM_TRANSFORM(JudgeBad) << std::endl;
+	ofs << ELEM_TRANSFORM(JudgeOffset) << std::endl;
+	ofs << ELEM_TRANSFORM(SongPlaySpeed) << std::endl;
+	ofs << ELEM_TRANSFORM(SongBlankTime) << std::endl;
+	ofs << ELEM_TRANSFORM(SongOffset) << std::endl;
+	ofs << ELEM_TRANSFORM(SongVolume) << std::endl;
+	ofs << ELEM_TRANSFORM(SEVolume) << std::endl;
+	ofs << ELEM_TRANSFORM(ChartHeaderSound) << std::endl;
+	ofs << ELEM_TRANSFORM(JiroBPMDelayFlag) << std::endl;
+	ofs << ELEM_TRANSFORM(DrawingOperationRangeWidth) << std::endl;
+	ofs << ELEM_TRANSFORM(DrawingOperationRangeHeight) << std::endl;
+	ofs << ELEM_TRANSFORM(RandomRate) << std::endl;
+	ofs << ELEM_TRANSFORM(RollSpeed) << std::endl;
+	ofs << ELEM_TRANSFORM(ChartCreateMode) << std::endl;
+	ofs << ELEM_TRANSFORM(GridScreen) << std::endl;
+	ofs << ELEM_TRANSFORM(DebugScreen) << std::endl;
+
+#undef ELEM_TRANSFORM
+
+	ofs.close();
+}
 
 #ifndef __ANDROID__
 void FileLoad::LoadKeyConfigFile() {
 	vector<string> list;
-	if (!LoadFileTEXT(list, "keyconfig.ini")) { return; }
+	if (!LoadFileTEXT(list, "keyconfig.ini")) { MakeKeyConfigFile(); return; }
 	for (int i = 0; i < list.size(); ++i) {
 		for (int j = 0; j < 10; ++j) {
 			string val = strtrim(list[i].substr(list[i].find(":") + 1, list[i].size() - (list[i].find(":") + 1)));
@@ -91,6 +128,29 @@ void FileLoad::LoadKeyConfigFile() {
 			}
 		}
 	}
+}
+void FileLoad::MakeKeyConfigFile() {
+	std::ofstream ofs("keyconfig.ini");
+
+	auto colmun = [](std::ofstream& stream, const std::string& name, const std::vector<int>& arr)
+	{
+		for (int i = 0; auto&& elem : arr) {
+			stream << name << i << ":" << elem << std::endl;
+			++i;
+		}
+	};
+
+	colmun(ofs, "LeftKaInput", {KEY_INPUT_LK, KEY_INPUT_LK + (sizeof(KEY_INPUT_LK) / sizeof(decltype(KEY_INPUT_LK[0])))});
+	colmun(ofs, "LeftDonInput", {KEY_INPUT_LD, KEY_INPUT_LD + (sizeof(KEY_INPUT_LD) / sizeof(decltype(KEY_INPUT_LD[0])))});
+	colmun(ofs, "RightDonInput", {KEY_INPUT_RD, KEY_INPUT_RD + (sizeof(KEY_INPUT_RD) / sizeof(decltype(KEY_INPUT_RD[0])))});
+	colmun(ofs, "RightKaInput", {KEY_INPUT_RK, KEY_INPUT_RK + (sizeof(KEY_INPUT_RK) / sizeof(decltype(KEY_INPUT_RK[0])))});
+
+	ofs << "AutoPlayFlagInput" << ":" << QuickAccessKey[(int)QuickAccessID::AutoPlayFlag] << std::endl;
+	ofs << "DebugScreenInput" << ":" << QuickAccessKey[(int)QuickAccessID::DebugScreen] << std::endl;
+	ofs << "GridScreenInput" << ":" << QuickAccessKey[(int)QuickAccessID::GridScreen] << std::endl;
+	ofs << "ChartCreateModeInput" << ":" << QuickAccessKey[(int)QuickAccessID::ChartCreateMode] << std::endl;
+
+	ofs.close();
 }
 #endif
 
