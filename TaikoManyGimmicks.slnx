@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="TaikoManyGimmicks.vcxproj" Id="83d68840-87db-4b50-9395-c08d41223f04" />
+</Solution>
