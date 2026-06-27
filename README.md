@@ -23,6 +23,9 @@ that exception reason is "Skins" folder not exist in execution directory.
 default execution directory is .exe file output directory.
 copy Skins folder on .exe file same directory.
 
+# Recommend Step for Modding
+Refactoring.
+
 # Dependent Library
 in build, from Nuget Library is automatic setup.
 
