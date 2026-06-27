@@ -4,7 +4,7 @@ this is a taiko simulator, implement Gimmick too many.
 # How to Build
 requiement
 - Visual Studio 2026
-- High level C++ Knowledge
+- high knowledge of C++ ( beginer is not recommend )
 
 ## Repositry Clone
 clone repositry in commandline. see next line.
