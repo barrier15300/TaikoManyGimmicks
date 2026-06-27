@@ -18,7 +18,7 @@ open solution with Visual Studio 2026.
 F5 key press, Build start. ( or press to green triangle button in Toolbar )
 
 # Run and Debug
-you do plain build it, throw "out of range" exception.
+you do plain build to run it, throw "out of range" exception.
 that exception reason is "Skins" folder not exist in execution directory.
 default execution directory is .exe file output directory.
 copy Skins folder on .exe file same directory.
