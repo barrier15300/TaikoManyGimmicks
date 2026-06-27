@@ -17,6 +17,12 @@ else, you can clone with Visual Studio 2026.
 open solution with Visual Studio 2026.
 F5 key press, Build start. ( or press to green triangle button in Toolbar )
 
+# Run and Debug
+plainly build, throw out of range exception.
+that exception reason is "Skins" folder not exist in execution directory.
+default execution directory is .exe file output directory.
+copy Skins folder on .exe file same directory.
+
 # Dependent Library
 in build, from Nuget Library is automatic setup.
 
