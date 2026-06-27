@@ -1,5 +1,5 @@
 # TaikoManyGimmicks
-this is a taiko simulator, implement too many Gimmicks.
+this is a taiko simulator, implement Gimmick too many.
 
 # How to Build
 requiement
