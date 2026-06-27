@@ -15,4 +15,4 @@ else, you can clone with Visual Studio 2026.
 
 ## Build
 open solution with Visual Studio 2026.
-F5 key press, Build start.　( or press to green triangle button in Toolbar )
+F5 key press, Build start. ( or press to green triangle button in Toolbar )
